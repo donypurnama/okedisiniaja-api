@@ -1,0 +1,18 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const admin_controller_js_1 = require("../controllers/admin.controller.js");
+const auth_js_1 = require("../middlewares/auth.js");
+const router = (0, express_1.Router)();
+router.use(auth_js_1.requireAuth, auth_js_1.requireAdmin);
+router.get("/clients", admin_controller_js_1.getClients);
+router.get("/clients/:id", admin_controller_js_1.getClientDetail);
+router.put("/clients/:id/password", admin_controller_js_1.resetClientPassword);
+router.get("/payments", admin_controller_js_1.getPayments);
+router.post("/payments/:id/verify", admin_controller_js_1.verifyPayment);
+router.get("/activities", admin_controller_js_1.getActivities);
+router.post("/activities", admin_controller_js_1.createActivity);
+router.put("/activities/:id", admin_controller_js_1.updateActivity);
+router.delete("/activities/:id", admin_controller_js_1.deleteActivity);
+router.get("/invoices", admin_controller_js_1.getInvoices);
+exports.default = router;
